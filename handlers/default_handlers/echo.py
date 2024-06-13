@@ -6,7 +6,7 @@ from database.database import database
 
 
 @bot.message_handler(func=lambda message: True)
-def echo_all(message) -> None:
+def handle_messages(message) -> None:
     if message.text == 'Новый ученик':
         register.register(message)
 
@@ -16,8 +16,6 @@ def echo_all(message) -> None:
     if message.text == 'Добавить результаты':
         enter_scores.new_score(message)
 
-    if message.text == 'Назад':
-        bot.delete_state()
     if message.text == 'Войти':
         if database.is_logged_in(message.from_user.id):
             pass
@@ -25,4 +23,5 @@ def echo_all(message) -> None:
             login.login(message)
     if message.text == 'Выйти':
         login.logout(message)
+
 
